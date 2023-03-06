@@ -16,6 +16,7 @@ final class RootTabBarController: UITabBarController, AppRootViewControllable, A
     tabBar.backgroundColor = .white
   }
   
+  // 뷰컨들 붙이기
   func setViewControllers(_ viewControllers: [ViewControllable]) {
     super.setViewControllers(viewControllers.map(\.uiviewController), animated: false)
   }

@@ -30,6 +30,7 @@ final class AppRootBuilder: Builder<AppRootDependency>, AppRootBuildable {
     
     let interactor = AppRootInteractor(presenter: tabBar)
     
+    // 세가지 자식 riblet을 붙이기 위해서 생성
     let appHome = AppHomeBuilder(dependency: component)
     let financeHome = FinanceHomeBuilder(dependency: component)
     let profileHome = ProfileHomeBuilder(dependency: component)
