@@ -12,25 +12,27 @@ protocol AddPaymentMethodPresentableListener: AnyObject {
     // TODO: Declare properties and methods that the view controller can invoke to perform
     // business logic, such as signIn(). This protocol is implemented by the corresponding
     // interactor class.
+    func didTapClose()
+    func didTapConfirm(with number: String, cvc: String, expiry: String)
 }
 
 final class AddPaymentMethodViewController: UIViewController, AddPaymentMethodPresentable, AddPaymentMethodViewControllable {
 
     weak var listener: AddPaymentMethodPresentableListener?
     
-    private let cardNumberTextField: UITextField = {
+    lazy var cardNumberTextField: UITextField = {
        let textfield = makeTextField()
         textfield.placeholder = "카드번호"
         return textfield
     }()
     
-    private let securityTextField: UITextField = {
+    lazy var securityTextField: UITextField = {
        let textfielf = makeTextField()
         textfielf.placeholder = "CVC"
         return textfielf
     }()
     
-    private let expirationTextField: UITextField = {
+    lazy var expirationTextField: UITextField = {
        let textfielf = makeTextField()
         textfielf.placeholder = "만료기간"
         return textfielf
@@ -65,8 +67,20 @@ final class AddPaymentMethodViewController: UIViewController, AddPaymentMethodPr
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewDidLoad() {
+        view.backgroundColor = .white
+    }
+    
     private func setupView() {
         title = "카드 추가"
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "xmark", withConfiguration: UIImage.SymbolConfiguration(pointSize: 18, weight: .semibold)),
+            style: .plain,
+            target: self,
+            action: #selector(didTapClosed)
+        )
+        
         view.addSubview(cardNumberTextField)
         view.addSubview(stackView)
         view.addSubview(addCardButton)
@@ -92,7 +106,6 @@ final class AddPaymentMethodViewController: UIViewController, AddPaymentMethodPr
             expirationTextField.heightAnchor.constraint(equalToConstant: 60),
             addCardButton.heightAnchor.constraint(equalToConstant: 60),
         ])
-        #warning("21분 3초")
     }
     
     private func makeTextField() -> UITextField {
@@ -106,6 +119,18 @@ final class AddPaymentMethodViewController: UIViewController, AddPaymentMethodPr
     
     @objc
     private func didTapAddCard() {
-        
+        if let number = cardNumberTextField.text,
+           let cvc = securityTextField.text,
+           let expiry = expirationTextField.text {
+            listener?.didTapConfirm(with: number, cvc: cvc, expiry: expiry)
+        }
     }
+    
+    
+    @objc
+    private func didTapClosed() {
+        listener?.didTapClose()
+    }
+
+    
 }
