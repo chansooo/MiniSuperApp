@@ -20,19 +20,19 @@ final class AddPaymentMethodViewController: UIViewController, AddPaymentMethodPr
 
     weak var listener: AddPaymentMethodPresentableListener?
     
-    lazy var cardNumberTextField: UITextField = {
+    private let cardNumberTextField: UITextField = {
        let textfield = makeTextField()
         textfield.placeholder = "카드번호"
         return textfield
     }()
     
-    lazy var securityTextField: UITextField = {
+    private let securityTextField: UITextField = {
        let textfielf = makeTextField()
         textfielf.placeholder = "CVC"
         return textfielf
     }()
     
-    lazy var expirationTextField: UITextField = {
+    private let expirationTextField: UITextField = {
        let textfielf = makeTextField()
         textfielf.placeholder = "만료기간"
         return textfielf
@@ -51,6 +51,7 @@ final class AddPaymentMethodViewController: UIViewController, AddPaymentMethodPr
     
     private lazy var addCardButton: UIButton = {
         let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.roundCorners()
         button.backgroundColor = .primaryRed
         button.setTitle("추가하기", for: .normal)
@@ -108,7 +109,7 @@ final class AddPaymentMethodViewController: UIViewController, AddPaymentMethodPr
         ])
     }
     
-    private func makeTextField() -> UITextField {
+    private static func makeTextField() -> UITextField {
         let textfield = UITextField()
         textfield.translatesAutoresizingMaskIntoConstraints = false
         textfield.backgroundColor = .white

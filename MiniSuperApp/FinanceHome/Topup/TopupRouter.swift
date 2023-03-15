@@ -48,7 +48,11 @@ final class TopupRouter: Router<TopupInteractable>, TopupRouting {
     }
     
     func attachAddPaymentMethod() {
-        if addPaymentMethodRouting != nil { return }
+        print("attachAddPaymentMethod")
+        if addPaymentMethodRouting != nil {
+            print("addPaymentMethodRouting not nil")
+            return
+        }
         
         let router = addPaymentMethodBuildable.build(withListener: interactor)
         presentInsideNavigation(router.viewControllable)
@@ -68,7 +72,7 @@ final class TopupRouter: Router<TopupInteractable>, TopupRouting {
         let navigation = NavigationControllerable(root: viewControllable)
         navigation.navigationController.presentationController?.delegate = interactor.presentationDelegateProxy
         self.navigationControllable = navigation
-        viewControllable.present(navigation, animated: true, completion: nil)
+        viewController.present(navigation, animated: true, completion: nil)
     }
     
     private func dismissPresentedNavigation(completion: (()-> Void)?) {

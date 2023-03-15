@@ -35,9 +35,7 @@ final class PaymentMethodView: UIView {
     }
     
     required init?(coder: NSCoder) {
-        
         fatalError("init(coder:) has not been implemented")
-        setupViews()
     }
     
     private func setupViews() {

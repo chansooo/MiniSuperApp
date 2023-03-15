@@ -20,7 +20,7 @@ protocol TopupListener: AnyObject {
 }
 
 protocol TopupInteractorDependency {
-    var cardOnFileRepository: CardOnFileRepository { get }
+    var cardsOnFileRepository: CardOnFileRepository { get }
 }
 
 final class TopupInteractor: Interactor, TopupInteractable, AddPaymentMethodListener, AdaptivePresentationControllerDelegate {
@@ -46,12 +46,13 @@ final class TopupInteractor: Interactor, TopupInteractable, AddPaymentMethodList
         // TODO: Implement business logic here.
         print("did become active")
         
-        if dependency.cardOnFileRepository.cardOnFile.value.isEmpty {
+        if dependency.cardsOnFileRepository.cardOnFile.value.isEmpty {
             // 카드 추가 호ㅓㅏ면
+            print("카드 추가 화면")
             router?.attachAddPaymentMethod()
         } else {
             // 금액 입력 화면
-            
+            print("금액 입력 화면")
         }
     }
 

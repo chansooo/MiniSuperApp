@@ -21,9 +21,8 @@ final class AddPaymentMethodButton: UIControl {
     }
     
     required init?(coder: NSCoder) {
-        
+//        setupViews()
         fatalError("init(coder:) has not been implemented")
-        setupViews()
     }
     
     private func setupViews() {

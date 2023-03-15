@@ -18,11 +18,7 @@ final class TopupComponent: Component<TopupDependency>, TopupInteractorDependenc
     
 
     // TODO: Make sure to convert the variable into lower-camelcase.
-    fileprivate var topupBaseViewController: ViewControllable {
-        dependency.topupBaseViewController
-    }
-
-    var cardOnFileRepository: CardOnFileRepository { dependency.cardsOnFileRepository }
+    fileprivate var topupBaseViewController: ViewControllable { dependency.topupBaseViewController }
     // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
 }
 
@@ -45,6 +41,10 @@ final class TopupBuilder: Builder<TopupDependency>, TopupBuildable {
         
         let addPaymentMethodBuilder = AddPaymentMethodBuilder(dependency: component)
         
-        return TopupRouter(interactor: interactor, viewController: component.topupBaseViewController, addpaymentbuildable: addPaymentMethodBuilder)
+        return TopupRouter(
+            interactor: interactor,
+            viewController: component.topupBaseViewController,
+            addpaymentbuildable: addPaymentMethodBuilder
+        )
     }
 }
