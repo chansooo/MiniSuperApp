@@ -44,6 +44,7 @@
 		5699D64C29C294C0002CB9ED /* CardOnFileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5699D64829C294C0002CB9ED /* CardOnFileInteractor.swift */; };
 		5699D64F29C2959D002CB9ED /* CardOnFileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5699D64D29C2959D002CB9ED /* CardOnFileCell.swift */; };
 		5699D65029C2959D002CB9ED /* CardOnFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5699D64E29C2959D002CB9ED /* CardOnFileViewController.swift */; };
+		56B7577729C3DCDA00EF101B /* SuperPayRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B7577629C3DCDA00EF101B /* SuperPayRepository.swift */; };
 		F57EBE542738468700FE9319 /* UIImage+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57EBE512738468700FE9319 /* UIImage+Utils.swift */; };
 		F57EBE552738468700FE9319 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57EBE522738468700FE9319 /* Array+Utils.swift */; };
 		F57EBE562738468700FE9319 /* UITableView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57EBE532738468700FE9319 /* UITableView+Utils.swift */; };
@@ -120,6 +121,7 @@
 		5699D64829C294C0002CB9ED /* CardOnFileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardOnFileInteractor.swift; sourceTree = "<group>"; };
 		5699D64D29C2959D002CB9ED /* CardOnFileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardOnFileCell.swift; sourceTree = "<group>"; };
 		5699D64E29C2959D002CB9ED /* CardOnFileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CardOnFileViewController.swift; path = "../../../../../Downloads/study/MiniSuperApp-main/Samples/Topup/CardOnFileViewController.swift"; sourceTree = "<group>"; };
+		56B7577629C3DCDA00EF101B /* SuperPayRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperPayRepository.swift; sourceTree = "<group>"; };
 		F57EBE512738468700FE9319 /* UIImage+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Utils.swift"; sourceTree = "<group>"; };
 		F57EBE522738468700FE9319 /* Array+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Utils.swift"; sourceTree = "<group>"; };
 		F57EBE532738468700FE9319 /* UITableView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Utils.swift"; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				566A2A6429B61D990060A7F5 /* CardOnFileRepository.swift */,
+				56B7577629C3DCDA00EF101B /* SuperPayRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -528,6 +531,7 @@
 				5699D63829C29040002CB9ED /* EnterAmountRouter.swift in Sources */,
 				F57F6AFE26DB4CD700C0117D /* RootTabBarController.swift in Sources */,
 				566A2A4A29AE033E0060A7F5 /* SuperPayDashboardBuilder.swift in Sources */,
+				56B7577729C3DCDA00EF101B /* SuperPayRepository.swift in Sources */,
 				F57F6AEB26DB4A2700C0117D /* FinanceHomeInteractor.swift in Sources */,
 				566A2A5B29B615190060A7F5 /* CardOnFileDashboardInteractor.swift in Sources */,
 				F5EAA21B270B395900EF2B70 /* AppHomeInteractor.swift in Sources */,

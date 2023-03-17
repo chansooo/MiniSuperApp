@@ -1,27 +1,23 @@
 import ModernRIBs
 
 protocol FinanceHomeDependency: Dependency {
-    // TODO: Declare the set of dependencies required by this RIB, but cannot be
-    // created by this RIB.
+    var cardsOnFileRepository: CardOnFileRepository { get }
+    var superPayRepository: SuperPayRepository { get }
 }
 
 final class FinanceHomeComponent: Component<FinanceHomeDependency>, SuperPayDashboardDependency, CardOnFileDashboardDependency, AddPaymentMethodDependency, TopupDependency {
         
-    var cardsOnFileRepository: CardOnFileRepository
-    var balance: ReadOnlyCurrentValuePublisher<Double> { balancePublisher }
+    var cardsOnFileRepository: CardOnFileRepository { dependency.cardsOnFileRepository }
+    var superPayRepository: SuperPayRepository { dependency.superPayRepository }
+
+    var balance: ReadOnlyCurrentValuePublisher<Double> { superPayRepository.balance }
     
     var topupBaseViewController: ViewControllable
     
-    private let balancePublisher: CurrentValuePublisher<Double>
-    
     init(
         dependency: FinanceHomeDependency,
-        balancePublisher: CurrentValuePublisher<Double>,
-        cardOnFileRepository: CardOnFileRepository,
         topupBaseViewController: ViewControllable
     ) {
-        self.balancePublisher = balancePublisher
-        self.cardsOnFileRepository = cardOnFileRepository
         self.topupBaseViewController = topupBaseViewController
         super.init(dependency: dependency)
     }
@@ -43,14 +39,11 @@ final class FinanceHomeBuilder: Builder<FinanceHomeDependency>, FinanceHomeBuild
     // 근데 그럼 interactor는 어디서 잡아두고 있을까?
     // builder에서 프로퍼티고 FinanceHomeInteractor를 잡고 있어야 메모리에서 해제가 되지 않는 것 아닌가?
     func build(withListener listener: FinanceHomeListener) -> FinanceHomeRouting {
-        let balancePublisher = CurrentValuePublisher<Double>(10000)
         
         let viewController = FinanceHomeViewController()
         
         let component = FinanceHomeComponent(
             dependency: dependency,
-            balancePublisher: balancePublisher,
-            cardOnFileRepository: CardOnFileRepositoryImpl(),
             topupBaseViewController: viewController
         )
         

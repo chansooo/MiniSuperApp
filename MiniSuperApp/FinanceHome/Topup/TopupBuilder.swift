@@ -11,9 +11,13 @@ protocol TopupDependency: Dependency {
     // TODO: Make sure to convert the variable into lower-camelcase.
     var topupBaseViewController: ViewControllable { get }
     var cardsOnFileRepository: CardOnFileRepository { get }
+    var superPayRepository: SuperPayRepository { get }
 }
 
 final class TopupComponent: Component<TopupDependency>, TopupInteractorDependency, AddPaymentMethodDependency, EnterAmountDependency, CardOnFileDependency {
+    
+    var superPayRepository: SuperPayRepository { dependency.superPayRepository }
+    
     var selectedPaymentMethod: ReadOnlyCurrentValuePublisher<PaymentModel> { paymentMethodStream }
     
     var cardsOnFileRepository: CardOnFileRepository { dependency.cardsOnFileRepository }

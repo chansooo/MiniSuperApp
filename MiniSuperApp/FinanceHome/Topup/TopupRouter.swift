@@ -57,15 +57,19 @@ final class TopupRouter: Router<TopupInteractable>, TopupRouting {
         }
     }
     
-    func attachAddPaymentMethod() {
-        print("attachAddPaymentMethod")
+    func attachAddPaymentMethod(closebuttonType: DismissButtonType) {
         if addPaymentMethodRouting != nil {
-            print("addPaymentMethodRouting not nil")
             return
         }
         
-        let router = addPaymentMethodBuildable.build(withListener: interactor)
-        presentInsideNavigation(router.viewControllable)
+        let router = addPaymentMethodBuildable.build(withListener: interactor, closeButtonType: closebuttonType)
+        
+        if let navigationControllable = navigationControllable {
+            navigationControllable.pushViewController(router.viewControllable, animated: true)
+        } else {
+            presentInsideNavigation(router.viewControllable)
+        }
+        
         attachChild(router)
         addPaymentMethodRouting = router
     }
@@ -73,7 +77,7 @@ final class TopupRouter: Router<TopupInteractable>, TopupRouting {
     func detachAddPaymentMethod() {
         guard let router = addPaymentMethodRouting else { return }
         
-        dismissPresentedNavigation(completion: nil)
+        navigationControllable?.popViewController(animated: true)
         detachChild(router)
         addPaymentMethodRouting = nil
     }
@@ -96,7 +100,15 @@ final class TopupRouter: Router<TopupInteractable>, TopupRouting {
         if enterAmountRouting != nil { return }
         
         let router = enterAmountBuildable.build(withListener: interactor)
-        presentInsideNavigation(router.viewControllable)
+        
+        if let navigation = navigationControllable {
+            navigation.setViewControllers([router.viewControllable])
+            resetChildRouting()
+        } else {
+            presentInsideNavigation(router.viewControllable)
+        }
+        
+        
         attachChild(router)
         enterAmountRouting = router
     }
@@ -125,6 +137,22 @@ final class TopupRouter: Router<TopupInteractable>, TopupRouting {
         navigationControllable?.popViewController(animated: true)
         detachChild(router)
         cardOnFileRouting = nil
+    }
+    
+    private func resetChildRouting() {
+        if let cardOnFileRouting = cardOnFileRouting {
+            detachChild(cardOnFileRouting)
+            self.cardOnFileRouting = nil
+        }
+        
+        if let addPaymentMethodRouting = addPaymentMethodRouting {
+            detachChild(addPaymentMethodRouting)
+            self.addPaymentMethodRouting = nil
+        }
+    }
+    
+    func popToRoot() {
+        navigationControllable?.popToRoot(animated: true)
     }
     
     // MARK: - Private
